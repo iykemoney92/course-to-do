@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
+// create express app
+const app = express();
+const port = process.env.PORT || 5000; 
+
 app.use(cors());
 app.use(express.json());
 
@@ -14,10 +18,12 @@ connection.on('open', () => {
     console.log("MongoDB database connection established successfully");
 })
 
-// create express app
-const app = express();
-const port = process.env.PORT || 5000;
+const studentRouter = require('./routes/students');
+const coursesRouter = require('./routes/courses');
+
+app.use('/students', studentRouter);
+app.use('/courses', coursesRouter);
 
 app.listen(port, () => {
-    console.log('Server is listening on port 8080' + port);
+    console.log('Server is listening on port ' + port);
 });

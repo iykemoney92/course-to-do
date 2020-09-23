@@ -1,5 +1,6 @@
 {
   "name": "course-to-do",
+  "description": "A simple MERN app that helps me manage students and courses they are offering",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
