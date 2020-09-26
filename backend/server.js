@@ -24,6 +24,8 @@ const coursesRouter = require('./routes/courses');
 app.use('/students', studentRouter);
 app.use('/courses', coursesRouter);
 
+app.use(express.static('../build'));
+
 app.listen(port, () => {
     console.log('Server is listening on port ' + port);
 });
