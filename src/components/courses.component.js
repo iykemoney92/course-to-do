@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 const Course = props => ( 
     <TableRow key={props.course.name}>
@@ -62,8 +63,6 @@ export default class Courses extends Component{
     render(){
         return (
             <div>
-              <div><Link href="/create" >Add New Course</Link>
-              </div>
                 <div>
                         <TableContainer component={Paper}>
                 <Table  aria-label="simple table">
@@ -84,6 +83,9 @@ export default class Courses extends Component{
                 </Table>
                 </TableContainer>
                 </div>
+                <div><Button href="/create" variant="contained" color="primary">Add New Course</Button>
+              </div>
+              
             </div>
      )
     }
