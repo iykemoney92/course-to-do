@@ -8,8 +8,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import axios from 'axios';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 
 const Course = props => ( 
     <TableRow key={props.course.name}>
@@ -22,7 +20,7 @@ const Course = props => (
     <TableCell align="right">{props.course.duration}</TableCell>
     <TableCell align="right">{props.course.date.substring(0,10)}</TableCell>
     <TableCell align="right"><Link href={"/edit/"+props.course._id}>
-        Link
+        Edit
       </Link></TableCell>
     
   </TableRow>
@@ -63,12 +61,9 @@ export default class Courses extends Component{
       }
     render(){
         return (
-            <div>. kuyffff
-              fuk
-              u
-              y'''''''''''''''''''
-              <div><Link href="/create" >Add New Course</Link> txy ty l'CFY"
-              h</div>
+            <div>
+              <div><Link href="/create" >Add New Course</Link>
+              </div>
                 <div>
                         <TableContainer component={Paper}>
                 <Table  aria-label="simple table">
