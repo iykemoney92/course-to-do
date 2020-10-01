@@ -47,7 +47,7 @@ router.route('/update/:id').post((req,res)=>{
     Course.findById(req.params.id)
     .then(course => {
         course.name = req.body.name;
-        corse.username = req.body.username;
+        course.username = req.body.username;
         course.description = req.body.description;
         course.duration = req.body.duration;
         course.credit_unit = req.body.credit_unit;

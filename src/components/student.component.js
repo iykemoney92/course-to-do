@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
+import axios from 'axios';
+import Container from '@material-ui/core/Container';
 
 export default class Student extends Component{
     constructor(props) {
@@ -33,9 +37,9 @@ export default class Student extends Component{
           email: this.state.email
         }
     
-        console.log(course);
+        console.log(student);
     
-        axios.post('http://localhost:5000/students/add', course)
+        axios.post('http://localhost:5000/students/add', student)
           .then(res => console.log(res.data));
     
         this.setState({
@@ -45,7 +49,27 @@ export default class Student extends Component{
       }
     render(){
         return (
-            <div></div>
+            <Container>
+            <h3>Add Student</h3>
+            <form onSubmit={this.onSubmit}>
+            <Box>
+                <TextField fullWidth required type="text"
+                    label="Username"
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
+                     />
+              </Box><Box>
+                <TextField fullWidth required type="text"
+                    label="Email"
+                    value={this.state.email}
+                    onChange={this.onChangeEmail}
+                     />
+              </Box>
+        <Box>
+              <Button type="submit"  color="primary" variant="contained">Create New Student</Button>
+              </Box>
+                </form>
+                </Container>
      )
     }
 }

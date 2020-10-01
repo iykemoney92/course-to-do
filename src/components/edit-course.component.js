@@ -23,7 +23,8 @@ export default class EditCourse extends Component{
           name: '',
           credit_unit: 0,
           date: new Date(),
-          students: []
+          students: [],
+          _id:''
         }
       }
     
@@ -48,7 +49,12 @@ export default class EditCourse extends Component{
             if (response.data.length > 0) {
               this.setState({
                 students: response.data.map(student => student),
-              })
+                
+              });
+              let student = response.data.find(student => student.username == this.state.username);
+              this.setState({
+                  _id : student._id
+              });
             }
           })
           .catch((error) => {
@@ -61,7 +67,9 @@ export default class EditCourse extends Component{
         let student = this.state.students.find(student => student._id ==  e.target.value);
         
         this.setState({
-          username: student.username
+          username: student.username,
+          _id: student._id,
+          email: student.email
         })
       }
     
@@ -77,9 +85,9 @@ export default class EditCourse extends Component{
         })
       }
     
-      onChangeDate(date) {
+      onChangeDate(e) {
         this.setState({
-          date: date
+          date: new Date(e.target.value)
         })
       }
     
@@ -103,12 +111,13 @@ export default class EditCourse extends Component{
           duration: this.state.duration,
           date: this.state.date,
           name: this.state.name,
-          credit_unit: this.state.credit_unit
+          credit_unit: this.state.credit_unit,
+          email: this.state.email
         }
     
-        console.log(exercise);
+        console.log(course);
     
-        axios.post('http://localhost:5000/courses/update/' + this.props.match.params.id, exercise)
+        axios.post('http://localhost:5000/courses/update/' + this.props.match.params.id, course)
           .then(res => console.log(res.data));
     
         window.location = '/';
@@ -121,7 +130,7 @@ export default class EditCourse extends Component{
                 <TextField fullWidth select ref="userInput"
                     required
                     label="Username"
-                    value={this.state.username}
+                    value={this.state._id}
                     onChange={this.onChangeUsername}>
                     {
                       this.state.students.map(function(student) {

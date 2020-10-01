@@ -25,7 +25,8 @@ export default class CreateCourse extends Component{
           name: '',
           credit_unit:0,
           students: [],
-          email:''
+          email:'',
+          _id : ''
         }
       }
     
@@ -34,9 +35,10 @@ export default class CreateCourse extends Component{
           .then(response => {
             if (response.data.length > 0) {
               this.setState({
-                students: response.data.map(student => {student}),
+                students: response.data.map(student => student),
                 username: response.data[0].username,
-                email: response.data[0].email
+                email: response.data[0].email,
+                _id: response.data[0]._id
               })
             }
           })
@@ -50,7 +52,8 @@ export default class CreateCourse extends Component{
         let student = this.state.students.find(student => student._id ==  e.target.value);
         this.setState({
           username: student.username,
-          email: student.email
+          email: student.email,
+          _id: student._id
         })
       }
     
@@ -66,9 +69,9 @@ export default class CreateCourse extends Component{
         })
       }
     
-      onChangeDate(date) {
+      onChangeDate(e) {
         this.setState({
-          date: date
+          date: new Date(e.target.value)
         })
       }
 
@@ -102,7 +105,7 @@ export default class CreateCourse extends Component{
         axios.post('http://localhost:5000/courses/add', course)
           .then(res => console.log(res.data));
     
-        //window.location = '/';
+        window.location = '/';
       }
     render(){
         return (
@@ -113,7 +116,7 @@ export default class CreateCourse extends Component{
           <TextField fullWidth select ref="userInput"
               required
               label="Username"
-              value={this.state.username}
+              value={this.state._id}
               onChange={this.onChangeUsername}>
               {
                 this.state.students.map(function(student) {
