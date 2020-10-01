@@ -9,7 +9,7 @@ let handleNav = (event, newValue) => {
     case 1:
       window.location.replace('/');
       break;
-      case 2:
+      case 0:
         window.location.replace('/student');
         break;
     default:
